@@ -52,20 +52,28 @@
     <div class="columns is-gapless">
 
       <div class="column">
-        <section class="section">
-          <h1 class="title">
-            {{ happening.title }}
-          </h1>
-          <p>
-            {{ happening.text }}
-          </p>
+        <section class="section is-medium">
+          <div class="columns is-centered">
+            <div class="column is-10">
+
+              <article class="content is-large">
+                <h1 class="title">
+                  {{ happening.title }}
+                </h1>
+                <p>
+                  {{ happening.text }}
+                </p>
+              </article>
+              
+            </div>
+          </div>
         </section>
       </div>
       
       <div class="column is-narrow">
-          <img src="{{ happening.image.url }}" class="">
+        <img src="{{ happening.image.url }}" class="">
       </div>
-      
+          
     </div>
   </div>
   {% endfor %}
