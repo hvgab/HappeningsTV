@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,18 +8,67 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    {% comment %} Scrollify {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.min.js"></script>
+    <script>
+        $(function() {
+          $.scrollify({
+            section : ".scroll",
+          });
+        });
+    </script>
+
+
+    <style>
+      html, body {
+        height: 100%;
+      }
+      .full-height {
+        height: 100%;
+      }
+      .columns {
+        height: 100%;
+      }
+      img {
+        max-height: 100vh;
+      }
+    </style>
   </head>
   <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        {{ happening.title }}
-      </h1>
-      <p>
-        {{ happening.description }}
-      </p>
+  <script>
+    window.setInterval(function() {
+      if ( $.scrollify.currentIndex()+1 == {{ happenings|length }}){
+        $.scrollify.move(0);
+      } else {
+        $.scrollify.next();
+      }
+    }, 3000) // 600.000ms = 10min
+  </script>
+  
+  {% for happening in happenings %}
+  <div class="scroll is-marginless is-paddingless">
+    <div class="columns is-gapless">
+
+      <div class="column">
+        <section class="section">
+          <h1 class="title">
+            {{ happening.title }}
+          </h1>
+          <p>
+            {{ happening.text }}
+          </p>
+        </section>
+      </div>
+      
+      <div class="column is-narrow">
+          <img src="{{ happening.image.url }}" class="">
+      </div>
+      
     </div>
-    
-  </section>
+  </div>
+  {% endfor %}
+
   </body>
 </html>

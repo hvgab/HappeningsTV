@@ -8,8 +8,11 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(models.Happening)
 class HappeningAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'start_date', 'end_date')
+    list_filter = ('start_date', 'end_date')
+    
 
 @admin.register(models.Registration)
 class RegistrationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'happening')
+    list_filter = ['happening']

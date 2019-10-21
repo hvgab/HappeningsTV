@@ -4,10 +4,10 @@ class Tag(models.Model):
     # id = uuid
     name = models.CharField(max_length=128)
 
-    def str(self):
-        return f'{name}'
+    def __str__(self):
+        return f'{self.name}'
 
-    def repr(self):
+    def __repr__(self):
         return f'<Tag({self.name})>'
 
 class Happening(models.Model):
@@ -15,14 +15,14 @@ class Happening(models.Model):
     title = models.CharField(max_length=128)
     image = models.ImageField()
     text = models.TextField(max_length=1024)
-    tags = models.ForeignKey(Tag, on_delete='NULL')
+    tags = models.ManyToManyField(Tag)
     start_date = models.DateField()
     end_date = models.DateField()
 
-    def str(self):
+    def __str__(self):
         return '{} ({})'.format(self.title, self.start_date)
 
-    def repr(self):
+    def __repr__(self):
         return '<Happening({}, {})>'.format(self.title, self.start_date)
 
 
@@ -33,8 +33,8 @@ class Registration(models.Model):
     email = models.CharField(max_length=320)
     happening = models.ForeignKey(Happening, on_delete='CASCADE')
 
-    def str(self):
+    def __str__(self):
         return f'{self.name} - {self.happening.title}'
 
-    def repr(self):
+    def __repr__(self):
         return f'<Registration({self.name}, {self.mobile}, {self.email}, {self.happening})>'
