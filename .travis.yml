@@ -11,3 +11,7 @@ install:
   - pip install -q Django==$DJANGO
 script:
   - python happenings/manage.py test
+jobs:
+  allow_failures:
+    - install:
+        - pip install -q --pre django
