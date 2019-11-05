@@ -5,9 +5,12 @@ python:
   - 3.8
 env:
   - DJANGO=2.2
-  - DJANGO=3.0
 install:
   - pip install -q -r requirements.txt
   - pip install -q Django==$DJANGO
 script:
   - python happenings/manage.py test
+jobs:
+  allow_failures:
+    - install:
+        - pip install -q --pre django
