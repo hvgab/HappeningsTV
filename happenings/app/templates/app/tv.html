@@ -44,13 +44,14 @@
       } else {
         $.scrollify.next();
       }
-    }, 3000) // 600.000ms = 10min
+    }, 30000) // 600.000ms = 10min
   </script>
   
   {% for happening in happenings %}
   <div class="scroll is-marginless is-paddingless">
-    <div class="columns is-gapless">
+    <div class="columns is-gapless is-centered {% if not happening.text %}has-background-black{% endif %}">
 
+      {% if happening.text %}
       <div class="column">
         <section class="section is-medium">
           <div class="columns is-centered">
@@ -69,6 +70,7 @@
           </div>
         </section>
       </div>
+      {% endif %}
       
       <div class="column is-narrow">
         <img src="{{ happening.image.url }}" class="">

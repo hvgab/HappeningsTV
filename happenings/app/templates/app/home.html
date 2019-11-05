@@ -27,22 +27,81 @@
     </style>
   </head>
   <body>
-  
-    <div class="columns">
+    
+    <section class="section hero is-dark">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Maskineriet Happenings
+          </h1>
+          <h2 class="subtitle">
+            Hva skjer'a?
+          </h2>
+        </div>
+      </div>
+    </section>
 
-      <div class="column">
-        <section class="section">
-          for tag in tags:
-          link til tv/tag
-          <a href="">admin</a>
-        </section>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+    
+          <div class="column is-narrow">
+            
+            <aside class="menu">
+              <p class="menu-label">Go to TV view</p>
+              <ul>
+                {% for tag in tags %}
+                <li><a href="{% url 'tv' tag_name=tag.name %}" class="">{{tag.name}}</a></li>
+                {% endfor %}
+              </ul>
+              <p class="menu-label">Admin</p>
+              <ul>
+                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+              </ul>
+            </aside>
+
+          </div>
+
+          <div class="column is-narrow">
+
+            <table class="table is-striped">
+              <thead>
+                <th>Event</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+                {% for happening in active_happenings %}
+                  <tr>
+                    <td>{{happening.title}}</td>
+                    <td>{{happening.start_date}}</td>
+                    <td>{{happening.end_date}}</td>
+                    <td class="has-text-success">{{happening.get_status}}</td>
+                  </tr>
+                {% endfor %}
+                {% for happening in upcoming_happenings %}
+                  <tr>
+                    <td>{{happening.title}}</td>
+                    <td>{{happening.start_date}}</td>
+                    <td>{{happening.end_date}}</td>
+                    <td class="has-text-warning">{{happening.get_status}}</td>
+                  </tr>
+                {% endfor %}
+                {% for happening in finished_happenings %}
+                  <tr>
+                    <td>{{happening.title}}</td>
+                    <td>{{happening.start_date}}</td>
+                    <td>{{happening.end_date}}</td>
+                    <td class="has-text-danger">{{happening.get_status}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+        </div>
       </div>
-      
-      <div class="column is-narrow">
-          <img src="{{ happening.image.url }}" class="">
-      </div>
-      
-    </div>
-  </div>
+    </section>
+
   </body>
 </html>

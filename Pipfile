@@ -7,8 +7,9 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-django = "*"
-pillow = "*"
+Django = "==2.2.6"
+Pillow = "==6.2.1"
+django-debug-toolbar = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
