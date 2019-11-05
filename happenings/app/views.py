@@ -11,7 +11,7 @@ def home(request):
 def tv(request, tag_name):
     tag = models.Tag.objects.get(name__iexact=tag_name)
     happenings = models.Happening.happenings.active().filter(tags__in=[tag]).all()
-    return render(request, 'app/tv.html', dict(happenings=happenings))
+    return render(request, 'app/tv.html', dict(happenings=happenings, tag=tag))
 
 def register_to_event(request):
     """Form to register to event.
