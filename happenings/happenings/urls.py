@@ -29,3 +29,10 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
+
+
+# Sentry
+def trigger_error(request):
+    division_by_zero = 1/ 0
+
+urlpatterns.append(path('sentry-debug', trigger_error))
