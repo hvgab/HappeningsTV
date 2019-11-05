@@ -1,1 +1,2 @@
-[![CircleCI](https://circleci.com/gh/hvgab/HappeningsTV.svg?style=svg)](https://circleci.com/gh/hvgab/HappeningsTV)
+- Circle CI [![CircleCI](https://circleci.com/gh/hvgab/HappeningsTV.svg?style=svg)](https://circleci.com/gh/hvgab/HappeningsTV)
+- Travis [![Build Status](https://travis-ci.com/hvgab/HappeningsTV.svg?branch=master)](https://travis-ci.com/hvgab/HappeningsTV)
