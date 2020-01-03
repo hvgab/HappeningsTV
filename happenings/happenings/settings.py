@@ -14,22 +14,16 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-
+from .settings_database import *  # noqa
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SECRET_KEY = os.getenv('SECRET_KEY', 'NOT_THAT_SUPER_SECRET_DEV_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+DEBUG = bool(os.getenv('DEBUG', '0'))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'SUPER-SECRET-KEY'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(';')
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -37,12 +31,12 @@ INTERNAL_IPS = ['127.0.0.1']
 # Exception handling
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
-    integrations=[DjangoIntegration()]
+    integrations=[DjangoIntegration()],
+    send_default_pii=True
 )
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,17 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'happenings.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -121,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Oslo'
 
 USE_I18N = True
 
@@ -133,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = 'STATIC'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-MEDIA_ROOT = 'MEDIA'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 MEDIA_URL = '/media/'
