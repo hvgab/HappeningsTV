@@ -33,6 +33,7 @@ if settings.DEBUG:
 
 # Sentry
 def trigger_error(request):
-    division_by_zero = 1/ 0
+    division_by_zero = 1/0  # noqa
 
-urlpatterns.append(path('sentry-debug', trigger_error))
+
+urlpatterns.append(path('trigger-error', trigger_error))

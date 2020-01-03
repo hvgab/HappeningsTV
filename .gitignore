@@ -1,6 +1,11 @@
 .vscode
 static/
 media/
+.env.dev
+.env.prod
+Pipfile.lock
+mysql.cnf
+staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
